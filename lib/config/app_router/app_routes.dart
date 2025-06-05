@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:profile_management_app/feature/register/views/register_screen.dart';
 import 'package:profile_management_app/sample_screen.dart';
 
 class AppRoutes {
@@ -8,7 +9,7 @@ class AppRoutes {
       GoRoute(
         path: "/register",
         name: "/register",
-        builder: (context, state) => SampleScreen(),
+        builder: (context, state) => RegisterScreen(),
       ),
 
       GoRoute(
