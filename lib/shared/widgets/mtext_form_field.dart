@@ -52,6 +52,7 @@ class MtextPasswordFormField extends StatelessWidget {
   final String labelText;
   final TextInputType textInputType;
   final bool isShowPassword;
+  final Function onTapSuffixIcon;
 
   const MtextPasswordFormField({
     super.key,
@@ -62,6 +63,7 @@ class MtextPasswordFormField extends StatelessWidget {
     required this.labelText,
     required this.textInputType,
     required this.isShowPassword,
+    required this.onTapSuffixIcon,
   });
 
   @override
@@ -81,20 +83,25 @@ class MtextPasswordFormField extends StatelessWidget {
           controller: controller,
           validator: (value) {
             if (passwordController != null) {
-              return validator(value, labelText);
+              return validator(value, labelText, passwordController!.text);
             }
 
-            return validator(value, labelText, passwordController!.text);
+            return validator(value);
           },
           keyboardType: textInputType,
           style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
-          obscureText: isShowPassword,
+          obscureText: !isShowPassword,
           decoration: InputDecoration(
             hintText: hintText,
-            suffixIcon:
-                isShowPassword
-                    ? Icon(Icons.lock)
-                    : Icon(Icons.remove_red_eye_outlined),
+            suffixIcon: IconButton(
+              onPressed: () {
+                onTapSuffixIcon();
+              },
+              icon:
+                  isShowPassword
+                      ? Icon(Icons.lock)
+                      : Icon(Icons.remove_red_eye_outlined),
+            ),
           ),
         ),
       ],

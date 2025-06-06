@@ -32,6 +32,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0"
+  auth_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/auth_repository"
+      relative: true
+    source: path
+    version: "1.0.0"
   bloc:
     dependency: transitive
     description:
@@ -144,6 +151,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.5.4"
+  firebase_auth_api:
+    dependency: "direct main"
+    description:
+      path: "packages/firebase_auth_api"
+      relative: true
+    source: path
+    version: "1.0.0"
   firebase_auth_platform_interface:
     dependency: transitive
     description:

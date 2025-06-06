@@ -12,4 +12,12 @@ final class RegisterBtnPressed extends RegisterEvent {
   });
 }
 
+final class RegisterCheckBoxClicked extends RegisterEvent {
+  final bool accepted;
+
+  RegisterCheckBoxClicked({required this.accepted});
+}
+
+final class RegisterPasswordToggled extends RegisterEvent {}
+
 final class RegisterStateReset extends RegisterEvent {}

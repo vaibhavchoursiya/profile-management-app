@@ -41,6 +41,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
             ),
             SizedBox(height: AppTypography.textFormFieldSpace),
             MtextPasswordFormField(
+              onTapSuffixIcon: () {},
               controller: passwordController,
               validator: Validators.passwordValidator,
               labelText: "Password",
