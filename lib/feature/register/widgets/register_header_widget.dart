@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:profile_management_app/config/app_theme/app_typography.dart';
 
 class RegisterHeaderWidget extends StatelessWidget {
   const RegisterHeaderWidget({super.key});
@@ -7,26 +7,23 @@ class RegisterHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: Row(
         children: [
           IconButton(
             onPressed: () {},
-            style: IconButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              foregroundColor: Theme.of(context).colorScheme.primary,
+            icon: Icon(
+              Icons.arrow_back,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
-            icon: Icon(Icons.arrow_back),
+            style: IconButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+            ),
           ),
-
           const SizedBox(width: 12.0),
           Text(
-            "Create Account",
-            style: GoogleFonts.roboto(
-              color: Theme.of(context).colorScheme.onPrimary,
-              fontWeight: FontWeight.w500,
-              fontSize: 20.0,
-            ),
+            "Create account",
+            style: AppTypography.authHeaderTextStyle(context),
           ),
         ],
       ),
