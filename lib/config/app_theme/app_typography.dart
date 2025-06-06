@@ -14,4 +14,7 @@ class AppTypography {
     fontWeight: FontWeight.bold,
     fontSize: 24.0,
   );
+
+  static TextStyle formBtnTextStyle(context) =>
+      GoogleFonts.roboto(fontWeight: FontWeight.w700, fontSize: 16.0);
 }

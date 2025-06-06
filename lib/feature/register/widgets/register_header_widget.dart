@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:profile_management_app/config/app_theme/app_typography.dart';
 
 class RegisterHeaderWidget extends StatelessWidget {
@@ -11,7 +12,9 @@ class RegisterHeaderWidget extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.go("/login");
+            },
             icon: Icon(
               Icons.arrow_back,
               color: Theme.of(context).colorScheme.onPrimary,

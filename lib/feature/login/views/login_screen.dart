@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:profile_management_app/feature/register/widgets/register_form_widget.dart';
-import 'package:profile_management_app/feature/register/widgets/register_header_widget.dart';
+import 'package:profile_management_app/feature/login/widgets/login_form_widget.dart';
+import 'package:profile_management_app/feature/login/widgets/login_header_widget.dart';
 import 'package:profile_management_app/shared/helper_methods/helper_methods.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,9 @@ class RegisterScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: HelperMethods.getResponsiveHeight(context) * 0.08),
-            RegisterHeaderWidget(),
-            RegisterFormWidget(),
+            LoginHeaderWidget(),
+            LoginFormWidget(),
+
             // FooterWaveWidget(),
           ],
         ),

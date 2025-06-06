@@ -1,10 +1,12 @@
 import 'package:go_router/go_router.dart';
+import 'package:profile_management_app/feature/login/views/login_screen.dart';
+import 'package:profile_management_app/feature/login/widgets/login_form_widget.dart';
 import 'package:profile_management_app/feature/register/views/register_screen.dart';
 import 'package:profile_management_app/sample_screen.dart';
 
 class AppRoutes {
   static GoRouter router = GoRouter(
-    initialLocation: "/register",
+    initialLocation: "/login",
     routes: <GoRoute>[
       GoRoute(
         path: "/register",
@@ -15,7 +17,7 @@ class AppRoutes {
       GoRoute(
         path: "/login",
         name: "/login",
-        builder: (context, state) => SampleScreen(),
+        builder: (context, state) => LoginScreen(),
       ),
       GoRoute(
         path: "/change_password",
