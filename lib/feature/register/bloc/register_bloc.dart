@@ -1,6 +1,6 @@
 import 'package:auth_api/auth_api.dart';
 import 'package:auth_repository/auth_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_api/firebase_auth_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profile_management_app/feature/register/bloc/register_event.dart';
@@ -53,7 +53,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           ),
         ),
       );
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthApiException catch (e) {
       emit(
         state.copyWith(
           stateStatusModel: StateStatusModel(
@@ -69,11 +69,27 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   _registerCheckBoxClicked(RegisterCheckBoxClicked event, emit) {
-    emit(state.copyWith(accepted: event.accepted));
+    emit(
+      state.copyWith(
+        accepted: event.accepted,
+        stateStatusModel: StateStatusModel(
+          status: Status.initial,
+          message: "initial",
+        ),
+      ),
+    );
   }
 
   _registerPasswordToggled(event, emit) {
-    emit(state.copyWith(showPassword: !state.showPassword));
+    emit(
+      state.copyWith(
+        showPassword: !state.showPassword,
+        stateStatusModel: StateStatusModel(
+          status: Status.initial,
+          message: "initial",
+        ),
+      ),
+    );
   }
 
   _registerStateReset(event, emit) {

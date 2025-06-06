@@ -19,9 +19,15 @@ class FirebaseAuthApiBase extends AuthApiBase {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        throw FirebaseException('No user found for that email.');
+        throw FirebaseAuthApiException('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        throw FirebaseException('Wrong password provided for that user.');
+        throw FirebaseAuthApiException(
+          'Wrong password provided for that user.',
+        );
+      } else {
+        throw FirebaseAuthApiException(
+          'Wrong password provided for that user.',
+        );
       }
     } catch (e) {
       throw AuthApiException("Faild to login user: $e");
@@ -45,9 +51,13 @@ class FirebaseAuthApiBase extends AuthApiBase {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        throw FirebaseException('The password provided is too weak.');
+        throw FirebaseAuthApiException('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        throw FirebaseException('The account already exists for that email.');
+        throw FirebaseAuthApiException(
+          'The account already exists for that email.',
+        );
+      } else {
+        throw FirebaseAuthApiException("$e");
       }
     } catch (e) {
       throw AuthApiException("Faild to regsister user: $e");
@@ -77,10 +87,10 @@ class AuthApiException implements Exception {
   String toString() => 'AuthApiException: $message';
 }
 
-class FirebaseException implements Exception {
+class FirebaseAuthApiException implements Exception {
   final String message;
-  FirebaseException(this.message);
+  FirebaseAuthApiException(this.message);
 
   @override
-  String toString() => 'FirebaseException: $message';
+  String toString() => message;
 }
