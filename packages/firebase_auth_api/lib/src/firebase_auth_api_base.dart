@@ -3,7 +3,9 @@ import 'package:auth_api/src/models/auth_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthApiBase extends AuthApiBase {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth firebaseAuth;
+
+  FirebaseAuthApiBase({required this.firebaseAuth});
 
   @override
   Future<void> deleteUser(String id) {
