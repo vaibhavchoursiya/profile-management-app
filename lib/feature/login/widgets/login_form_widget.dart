@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:profile_management_app/config/app_theme/app_typography.dart';
+import 'package:profile_management_app/feature/login/bloc/login_bloc.dart';
+import 'package:profile_management_app/feature/login/bloc/login_event.dart';
+import 'package:profile_management_app/feature/login/bloc/login_state.dart';
 import 'package:profile_management_app/shared/validators/validators.dart';
 import 'package:profile_management_app/shared/widgets/mtext_form_field.dart';
 
@@ -19,8 +23,21 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
 
   final TextEditingController passwordController = TextEditingController();
 
+  clearTextEditingController() {
+    emailController.clear();
+    passwordController.clear();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final loginBloc = context.read<LoginBloc>();
     return Form(
       key: loginFormKey,
       child: Padding(
@@ -40,14 +57,23 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               textInputType: TextInputType.emailAddress,
             ),
             SizedBox(height: AppTypography.textFormFieldSpace),
-            MtextPasswordFormField(
-              onTapSuffixIcon: () {},
-              controller: passwordController,
-              validator: Validators.passwordValidator,
-              labelText: "Password",
-              hintText: "Password",
-              textInputType: TextInputType.visiblePassword,
-              isShowPassword: false,
+            BlocSelector<LoginBloc, LoginState, bool>(
+              selector: (state) {
+                return state.showPassword;
+              },
+              builder: (context, state) {
+                return MtextPasswordFormField(
+                  onTapSuffixIcon: () {
+                    loginBloc.add(LoginPasswordToggled());
+                  },
+                  controller: passwordController,
+                  validator: Validators.loginPasswordValidator,
+                  labelText: "Password",
+                  hintText: "Password",
+                  textInputType: TextInputType.visiblePassword,
+                  isShowPassword: state,
+                );
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -71,7 +97,18 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               width: double.infinity,
               height: AppTypography.btnHeight,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (loginFormKey.currentState!.validate()) {
+                    loginBloc.add(
+                      LoginBtnPressed(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      ),
+                    );
+
+                    clearTextEditingController();
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -98,6 +135,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 ),
                 TextButton(
                   onPressed: () {
+                    loginBloc.add(LoginStateReset());
                     context.go("/register");
                   },
                   style: TextButton.styleFrom(

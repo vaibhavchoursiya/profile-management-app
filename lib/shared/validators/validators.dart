@@ -1,5 +1,5 @@
 class Validators {
-  static String? notEmptyValidator(String? value, String labelText) {
+  static String? notEmptyValidator(String? value, String? labelText) {
     if (value == null || value.isEmpty) {
       return "Please enter $labelText";
     }
@@ -57,6 +57,14 @@ class Validators {
     } else if (value != passwordValue) {
       return "Password don't match.";
     }
+    return null;
+  }
+
+  static String? loginPasswordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    }
+
     return null;
   }
 }

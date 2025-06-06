@@ -39,7 +39,7 @@ class RegisterScreen extends StatelessWidget {
                   const Color.fromRGBO(255, 82, 82, 1),
                 );
 
-                /// Reset state
+                ///  Reset state
                 resetState(context);
               } else if (stateStatus.status == Status.success) {
                 showSnackBarWidget(context, stateStatus.message, Colors.green);
