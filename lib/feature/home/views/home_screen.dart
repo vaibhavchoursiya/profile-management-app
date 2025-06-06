@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:profile_management_app/feature/login/bloc/login_bloc.dart';
-import 'package:profile_management_app/feature/login/bloc/login_event.dart';
+
+import 'package:profile_management_app/feature/home/widgets/home_nav_bar.dart';
+
+import 'package:profile_management_app/shared/helper_methods/helper_methods.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,21 +10,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("asdfkl"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              final LoginBloc loginBloc = context.read<LoginBloc>();
-              loginBloc.add(LogoutPressed());
-              context.go("/login");
-            },
-            icon: Icon(Icons.logout),
-          ),
-        ],
-      ),
-      body: Column(children: [
-          
+      drawer: Drawer(),
+      body: Column(
+        children: [
+          SizedBox(height: HelperMethods.getResponsiveHeight(context) * 0.04),
+          HomeNavBar(),
         ],
       ),
     );
