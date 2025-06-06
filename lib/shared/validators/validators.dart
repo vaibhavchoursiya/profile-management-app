@@ -46,4 +46,17 @@ class Validators {
 
     return 'Password must have:\n${errors.join('\n')}';
   }
+
+  static String? confirmPasswordValidator(
+    String? value,
+    String labelText,
+    String passwordValue,
+  ) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    } else if (value != passwordValue) {
+      return "Password don't match.";
+    }
+    return null;
+  }
 }

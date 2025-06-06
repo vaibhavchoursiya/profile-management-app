@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:profile_management_app/shared/helper_methods/helper_methods.dart';
+import 'package:profile_management_app/shared/validators/validators.dart';
 import 'package:profile_management_app/shared/widgets/mtext_form_field.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -87,7 +88,7 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
 
             MtextFormField(
               controller: nameController,
-              validator: (value) {},
+              validator: Validators.notEmptyValidator,
               labelText: "Username",
               hintText: "Your username",
               textInputType: TextInputType.text,
@@ -95,18 +96,28 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
             const SizedBox(height: 16.0),
             MtextFormField(
               controller: emailController,
-              validator: (value) {},
+              validator: Validators.emailValidator,
               labelText: "Email",
               hintText: "Your email",
               textInputType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 16.0),
-            MtextFormField(
-              controller: emailController,
-              validator: (value) {},
+            MtextPasswordFormField(
+              controller: passwordController,
+              validator: Validators.passwordValidator,
               labelText: "Password",
               hintText: "Password",
               textInputType: TextInputType.visiblePassword,
+              isShowPassword: false,
+            ),
+            const SizedBox(height: 16.0),
+            MtextPasswordFormField(
+              controller: passwordController,
+              validator: Validators.passwordValidator,
+              labelText: "Confirm Password",
+              hintText: "Confirm Password",
+              textInputType: TextInputType.visiblePassword,
+              isShowPassword: false,
             ),
 
             const SizedBox(height: 8.0),

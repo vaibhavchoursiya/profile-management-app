@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:profile_management_app/config/app_theme/app_theme.dart';
 
 class MtextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -20,12 +19,6 @@ class MtextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final border = UnderlineInputBorder(
-    //   borderSide: BorderSide(
-    //     color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.5),
-    //     width: 3.0,
-    //   ),
-    // );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -39,37 +32,69 @@ class MtextFormField extends StatelessWidget {
         const SizedBox(height: 8.0),
         TextFormField(
           controller: controller,
-          validator: (value) => validator(value),
+          validator: (value) {
+            return validator(value, labelText);
+          },
           keyboardType: textInputType,
           style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+          decoration: InputDecoration(hintText: hintText),
+        ),
+      ],
+    );
+  }
+}
+
+class MtextPasswordFormField extends StatelessWidget {
+  final TextEditingController controller;
+  final TextEditingController? passwordController;
+  final Function validator;
+  final String hintText;
+  final String labelText;
+  final TextInputType textInputType;
+  final bool isShowPassword;
+
+  const MtextPasswordFormField({
+    super.key,
+    required this.controller,
+    this.passwordController,
+    required this.validator,
+    required this.hintText,
+    required this.labelText,
+    required this.textInputType,
+    required this.isShowPassword,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          labelText,
+          style: GoogleFonts.roboto(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+        ),
+        const SizedBox(height: 8.0),
+        TextFormField(
+          controller: controller,
+          validator: (value) {
+            if (passwordController != null) {
+              return validator(value, labelText);
+            }
+
+            return validator(value, labelText, passwordController!.text);
+          },
+          keyboardType: textInputType,
+          style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+          obscureText: isShowPassword,
           decoration: InputDecoration(
             hintText: hintText,
-
-            hintStyle: GoogleFonts.roboto(
-              fontSize: 16.0,
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.4),
-            ),
-
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.2),
-              ),
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            ),
-
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.35),
-              ),
-
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            ),
+            suffixIcon:
+                isShowPassword
+                    ? Icon(Icons.lock)
+                    : Icon(Icons.remove_red_eye_outlined),
           ),
         ),
       ],

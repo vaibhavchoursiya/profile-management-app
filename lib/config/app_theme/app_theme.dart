@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static final Color primary = Color(0xFF462fbc);
@@ -16,15 +17,6 @@ class AppColors {
 
   static final scaffoldColor = Color(0Xffffffff);
 }
-
-// class AppCustomTheme {
-//   static final Color light = Colors.white;
-//   static final Color dark = Colors.black;
-//   static final Color primary = Colors.blueAccent;
-//   static final Color onPrimary = Colors.white;
-//   static final Color greyishColor = Colors.grey;
-//   static final Color accentColor = Colors.blueAccent;
-// }
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
@@ -45,6 +37,28 @@ class AppTheme {
       backgroundColor: AppColors.primary,
       centerTitle: true,
       titleTextStyle: TextStyle(color: AppColors.onPrimary),
+    ),
+
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: GoogleFonts.roboto(
+        fontSize: 16.0,
+        color: AppColors.onSurface.withValues(alpha: 0.4),
+      ),
+
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: AppColors.onSurface.withValues(alpha: 0.2),
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: AppColors.onSurface.withValues(alpha: 0.35),
+        ),
+
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
     ),
   );
 }
