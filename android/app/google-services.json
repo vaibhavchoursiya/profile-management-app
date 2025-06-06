@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395911634740",
+    "project_id": "profile-management-bbd1c",
+    "storage_bucket": "profile-management-bbd1c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395911634740:android:b97e9e2e1230a377558f61",
+        "android_client_info": {
+          "package_name": "com.example.profile_management_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD418LC0IJQ1luVOxfECBdyeRvTJ3Eb2kM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
