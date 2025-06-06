@@ -10,13 +10,14 @@ import 'package:profile_management_app/feature/login/bloc/login_bloc.dart';
 import 'package:profile_management_app/feature/register/bloc/register_bloc.dart';
 import 'package:profile_management_app/feature/splash/cubit/splash_cubit.dart';
 import 'package:profile_management_app/firebase_options.dart';
+import 'package:profile_management_app/shared/services/fireabse_auth_instance.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final firebaseAuth = FireabseAuthInstance.firebaseAuthInstance.firebaseAuth;
 
   final FirebaseAuthApiBase firebaseAuthApiBase = FirebaseAuthApiBase(
     firebaseAuth: firebaseAuth,

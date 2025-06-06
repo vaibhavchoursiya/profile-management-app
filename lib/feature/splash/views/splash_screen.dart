@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:profile_management_app/feature/splash/cubit/splash_cubit.dart';
-import 'package:profile_management_app/feature/splash/cubit/splash_state.dart';
+import 'package:profile_management_app/feature/home/views/home_screen.dart';
+import 'package:profile_management_app/feature/login/views/login_screen.dart';
+import 'package:profile_management_app/shared/services/fireabse_auth_instance.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,29 +12,22 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await initialize();
-    });
-  }
-
-  initialize() async {
-    final SplashCubit splashCubit = context.read<SplashCubit>();
-    splashCubit.checkUserLoggedIn();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SplashCubit, SplashState>(
-      listener: (context, state) {
-        if (state.isUserLogged == true) {
-          context.go("/home");
+    return StreamBuilder(
+      stream:
+          FireabseAuthInstance.firebaseAuthInstance.firebaseAuth
+              .authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(body: Center(child: CircularProgressIndicator()));
+        }
+        if (snapshot.hasData) {
+          return HomeScreen();
         } else {
-          context.go("/login");
+          return LoginScreen();
         }
       },
-      child: Scaffold(body: Center(child: CircularProgressIndicator())),
     );
   }
 }

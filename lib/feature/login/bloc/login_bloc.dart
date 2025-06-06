@@ -16,6 +16,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required this.authRepositoryBase}) : super(initialState) {
     on<LoginBtnPressed>(_loginBtnPressed);
     on<LoginPasswordToggled>(_loginPasswordToggled);
+
+    on<LogoutPressed>(_logoutPressed);
+
     on<LoginStateReset>(_loginStateReset);
   }
 
@@ -62,6 +65,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         stateStatusModel: StateStatusModel(status: Status.initial, message: ""),
       ),
     );
+  }
+
+  _logoutPressed(event, emit) async {
+    await authRepositoryBase.logoutUser();
   }
 
   _loginStateReset(event, emit) {

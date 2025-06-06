@@ -9,4 +9,6 @@ final class LoginBtnPressed extends LoginEvent {
 
 final class LoginPasswordToggled extends LoginEvent {}
 
+final class LogoutPressed extends LoginEvent {}
+
 final class LoginStateReset extends LoginEvent {}
