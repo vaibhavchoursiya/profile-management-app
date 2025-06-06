@@ -6,6 +6,7 @@ import 'package:profile_management_app/feature/login/bloc/login_event.dart';
 import 'package:profile_management_app/feature/login/bloc/login_state.dart';
 import 'package:profile_management_app/feature/login/widgets/login_form_widget.dart';
 import 'package:profile_management_app/feature/login/widgets/login_header_widget.dart';
+import 'package:profile_management_app/feature/register/widgets/register_header_widget.dart';
 import 'package:profile_management_app/shared/helper_methods/helper_methods.dart';
 import 'package:profile_management_app/shared/models/state_status_model.dart';
 import 'package:profile_management_app/shared/widgets/loading_model_barrier_widget.dart';
@@ -55,6 +56,7 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: HelperMethods.getResponsiveHeight(context) * 0.08,
                   ),
+
                   LoginHeaderWidget(),
                   LoginFormWidget(),
 

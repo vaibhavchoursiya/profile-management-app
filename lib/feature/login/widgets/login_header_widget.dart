@@ -12,10 +12,34 @@ class LoginHeaderWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: AppTypography.bodyPaddingHorizontal,
       ),
-      child: SvgPicture.asset(
-        "assets/images/login.svg",
-        width: double.infinity,
-        height: HelperMethods.getResponsiveHeight(context) * 0.3,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.lock,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+                style: IconButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              const SizedBox(width: 12.0),
+              Text(
+                "Login account",
+                style: AppTypography.authHeaderTextStyle(context),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20.0),
+          SvgPicture.asset(
+            "assets/images/login.svg",
+            width: double.infinity,
+            height: HelperMethods.getResponsiveHeight(context) * 0.3,
+          ),
+        ],
       ),
     );
   }

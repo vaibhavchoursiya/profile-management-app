@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static final Color primary = Color(0xFF462fbc);
+  // static final Color primary = Colors.indigoAccent;
   static final Color onPrimary = Color(0xFFf7fffd);
   static final Color secondary = Color(0xFFf1b002);
   static final Color onSecondary = Color(0xFFf4fff6);
@@ -15,7 +16,8 @@ class AppColors {
 
   static final Color greyishColor = Color(0xFF8e8e8e);
 
-  static final scaffoldColor = Color(0Xffffffff);
+  // static final scaffoldColor = Color.fromARGB(255, 236, 231, 255);
+  static final scaffoldColor = Colors.white;
 }
 
 class AppTheme {

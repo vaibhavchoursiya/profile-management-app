@@ -53,7 +53,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               controller: emailController,
               validator: Validators.emailValidator,
               labelText: "Email",
-              hintText: "Your email",
+              hintText: "example@email.com",
               textInputType: TextInputType.emailAddress,
             ),
             SizedBox(height: AppTypography.textFormFieldSpace),
@@ -91,7 +91,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 ),
               ],
             ),
-            SizedBox(height: AppTypography.textFormFieldSpace),
+            const SizedBox(height: 12.0),
 
             SizedBox(
               width: double.infinity,
