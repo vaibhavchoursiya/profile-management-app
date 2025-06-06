@@ -1,0 +1,49 @@
+class Validators {
+  static String? notEmptyValidator(String? value, String labelText) {
+    if (value == null || value.isEmpty) {
+      return "Please enter $labelText";
+    }
+    return null;
+  }
+
+  static String? emailValidator(String? value, String labelText) {
+    if (value == null || value.isEmpty) {
+      return "Please enter $labelText";
+    } else if (!value.contains("@")) {
+      return "Please enter valid $labelText";
+    }
+    return null;
+  }
+
+  static String? passwordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    }
+
+    final List<String> errors = [];
+
+    if (value.length < 8) {
+      errors.add('• At least 8 characters');
+    }
+
+    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+      errors.add('• One uppercase letter');
+    }
+
+    if (!RegExp(r'[a-z]').hasMatch(value)) {
+      errors.add('• One lowercase letter');
+    }
+
+    if (!RegExp(r'\d').hasMatch(value)) {
+      errors.add('• One number');
+    }
+
+    if (!RegExp(r'[!@#\$&*~_]').hasMatch(value)) {
+      errors.add('• One special character (!@#\$&*~_)');
+    }
+
+    if (errors.isEmpty) return null;
+
+    return 'Password must have:\n${errors.join('\n')}';
+  }
+}
