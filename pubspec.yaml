@@ -42,6 +42,13 @@ dependencies:
   firebase_auth: ^5.5.4
   cloud_firestore: ^5.6.8
 
+
+  user_api:
+    path: packages/user_api
+
+  auth_api:
+    path: packages/auth_api
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

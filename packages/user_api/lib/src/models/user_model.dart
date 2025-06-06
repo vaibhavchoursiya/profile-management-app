@@ -15,7 +15,10 @@ class UserModel {
 
   final DateTime createdAt;
 
+  final String userImage;
+
   UserModel({
+    required this.userImage,
     required this.id,
     required this.name,
     required this.dateOfBirth,
@@ -47,6 +50,7 @@ class UserModel {
       companyName: data["companyName"],
       experience: data["experience"],
       createdAt: DateTime.fromMillisecondsSinceEpoch(data["createdAt"] * 1000),
+      userImage: data["userImage"],
     );
   }
 
@@ -64,6 +68,7 @@ class UserModel {
       "companyName": companyName,
       "experience": experience,
       "createdAt": createdAt.millisecondsSinceEpoch / 1000,
+      "userImage": userImage,
     };
   }
 }
