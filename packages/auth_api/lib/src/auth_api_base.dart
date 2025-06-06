@@ -7,4 +7,6 @@ abstract class AuthApiBase {
   Future<void> deleteUser(String id);
 
   Future<void> updateUser(AuthModel authModel);
+
+  Future<void> logoutUser();
 }
