@@ -34,15 +34,23 @@ class FirebaseUserApiBase extends UserApiBase {
   }
 
   @override
-  Future<UserModel> getUserDetails(String id) async {
+  Future<UserModel> getUserDetails(String userId) async {
     try {
-      final doc = await collectionReference.doc(id).get();
+      final querySnapshot =
+          await collectionReference.where("userId", isEqualTo: userId).get();
 
-      if (doc.exists) {
-        return UserModel.fromJson(doc.data()! as Map<String, dynamic>);
-      } else {
+      if (querySnapshot.docs.isEmpty) {
         throw Exception("User not found");
       }
+
+      final doc = querySnapshot.docs.first;
+      final data = doc.data() as Map<String, dynamic>?;
+
+      if (data == null) {
+        throw Exception("User data is null");
+      }
+
+      return UserModel.fromJson(data);
     } catch (e) {
       throw Exception("Failed to get user details: $e");
     }
@@ -64,9 +72,21 @@ class FirebaseUserApiBase extends UserApiBase {
     try {
       final Map<String, dynamic> data = userModel.toMap();
       data["userImage"] = "";
-      await collectionReference.doc(userModel.id).update(data);
+
+      final querySnapshot =
+          await collectionReference
+              .where("userId", isEqualTo: userModel.userId)
+              .get();
+
+      if (querySnapshot.docs.isEmpty) {
+        throw Exception("User not found");
+      }
+
+      final docId = querySnapshot.docs.first.id;
+
+      await collectionReference.doc(docId).update(data);
     } catch (e) {
-      rethrow;
+      throw Exception("Failed to update user: $e");
     }
   }
 

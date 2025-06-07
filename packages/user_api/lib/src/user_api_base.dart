@@ -9,5 +9,5 @@ abstract class UserApiBase {
 
   Future<void> deleteUserDetails(String id);
 
-  Future<void> getUserDetails(String id);
+  Future<UserModel> getUserDetails(String id);
 }

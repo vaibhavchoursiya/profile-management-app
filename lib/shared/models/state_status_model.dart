@@ -8,6 +8,7 @@ enum Status {
   authorized,
   unauthorized,
   logout,
+  loaded,
 }
 
 class StateStatusModel extends Equatable {

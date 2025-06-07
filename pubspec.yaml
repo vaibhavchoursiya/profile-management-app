@@ -46,6 +46,12 @@ dependencies:
   user_api:
     path: packages/user_api
 
+  firebase_user_api:
+    path: packages/firebase_user_api
+
+  user_repository:
+    path: packages/user_repository
+
   auth_api:
     path: packages/auth_api
 

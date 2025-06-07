@@ -3,7 +3,6 @@
 /// More dartdocs go here.
 library;
 
-export 'src/user_api_base.dart';
-export 'src/models/user_model.dart';
+export 'src/user_repository_base.dart';
 
 // TODO: Export any libraries intended for clients of this package.

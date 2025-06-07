@@ -31,8 +31,10 @@ final class ProfileManagementDataSubmitted extends ProfileManagementEvent {
   final String experience;
   final String selectedDegree;
   final String selectedGender;
+  final String institutionName;
 
   ProfileManagementDataSubmitted({
+    required this.institutionName,
     required this.imagePath,
     required this.name,
     required this.dOB,
@@ -45,3 +47,5 @@ final class ProfileManagementDataSubmitted extends ProfileManagementEvent {
     required this.selectedGender,
   });
 }
+
+final class ProfileManagementStateReset extends ProfileManagementEvent {}

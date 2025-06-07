@@ -236,7 +236,6 @@ class _MdegreeDropMenuState extends State<MdegreeDropMenu> {
                     }
                     field.didChange(value);
                   },
-
                   enableSearch: true,
                   hintText: widget.hintText,
                   enableFilter: true,

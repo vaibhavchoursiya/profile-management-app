@@ -1,25 +1,26 @@
 class UserModel {
-  final String id;
+  // final String id;
   final String name;
-  final DateTime dateOfBirth;
+  final String dateOfBirth;
   final String address;
   final String gender;
 
   final String degree;
   final String institutionName;
-  final DateTime yearOfPassing;
+  final int yearOfPassing;
 
   final String jobTitle;
   final String companyName;
-  final num experience;
+  final double experience;
 
-  final DateTime createdAt;
+  final String createdAt;
 
   final String userImage;
+  final String userId;
 
   UserModel({
     required this.userImage,
-    required this.id,
+    // required this.id,
     required this.name,
     required this.dateOfBirth,
     required this.address,
@@ -32,15 +33,15 @@ class UserModel {
     required this.experience,
 
     required this.createdAt,
+    required this.userId,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> data) {
     return UserModel(
-      id: data["id"],
+      // id: data["id"],
       name: data["name"],
-      dateOfBirth: DateTime.fromMillisecondsSinceEpoch(
-        data["dateOfBirth"] * 1000,
-      ),
+      dateOfBirth: data["dateOfBirth"],
+
       address: data["address"],
       gender: data["gender"],
       degree: data["degree"],
@@ -49,16 +50,16 @@ class UserModel {
       jobTitle: data["jobTitle"],
       companyName: data["companyName"],
       experience: data["experience"],
-      createdAt: DateTime.fromMillisecondsSinceEpoch(data["createdAt"] * 1000),
+      createdAt: data["createdAt"],
       userImage: data["userImage"],
+      userId: data["userId"],
     );
   }
 
   toMap() {
     return {
-      "id": id,
       "name": name,
-      "dateOfBirth": dateOfBirth.millisecondsSinceEpoch / 1000,
+      "dateOfBirth": dateOfBirth,
       "address": address,
       "gender": gender,
       "degree": degree,
@@ -67,8 +68,9 @@ class UserModel {
       "jobTitle": jobTitle,
       "companyName": companyName,
       "experience": experience,
-      "createdAt": createdAt.millisecondsSinceEpoch / 1000,
+      "createdAt": createdAt,
       "userImage": userImage,
+      "userId": userId,
     };
   }
 }
