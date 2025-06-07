@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:profile_management_app/feature/home/views/home_screen.dart';
 import 'package:profile_management_app/feature/login/views/login_screen.dart';
+import 'package:profile_management_app/feature/profile_management/views/profile_management_screen.dart';
 import 'package:profile_management_app/feature/register/views/register_screen.dart';
 import 'package:profile_management_app/feature/splash/views/splash_screen.dart';
 import 'package:profile_management_app/sample_screen.dart';
@@ -43,7 +44,7 @@ class AppRoutes {
       GoRoute(
         path: "/profile_management",
         name: "/profile_management",
-        builder: (context, state) => SampleScreen(),
+        builder: (context, state) => ProfileManagementScreen(),
       ),
 
       GoRoute(

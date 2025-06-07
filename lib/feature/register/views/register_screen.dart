@@ -5,9 +5,9 @@ import 'package:profile_management_app/feature/register/bloc/register_bloc.dart'
 import 'package:profile_management_app/feature/register/bloc/register_event.dart';
 import 'package:profile_management_app/feature/register/bloc/register_state.dart';
 import 'package:profile_management_app/feature/register/widgets/register_form_widget.dart';
-import 'package:profile_management_app/feature/register/widgets/register_header_widget.dart';
 import 'package:profile_management_app/shared/helper_methods/helper_methods.dart';
 import 'package:profile_management_app/shared/models/state_status_model.dart';
+import 'package:profile_management_app/shared/widgets/header_widget.dart';
 import 'package:profile_management_app/shared/widgets/loading_model_barrier_widget.dart';
 import 'package:profile_management_app/shared/widgets/show_snack_bar_widget.dart';
 
@@ -56,7 +56,16 @@ class RegisterScreen extends StatelessWidget {
                     SizedBox(
                       height: HelperMethods.getResponsiveHeight(context) * 0.08,
                     ),
-                    RegisterHeaderWidget(),
+                    HeaderWidget(
+                      iconData: Icons.arrow_back,
+                      onTap: () {
+                        final registerBloc = context.read<RegisterBloc>();
+                        registerBloc.add(RegisterStateReset());
+                        context.go("/login");
+                      },
+                      titleText: "Create account",
+                    ),
+
                     RegisterFormWidget(),
                     // FooterWaveWidget(),
                   ],

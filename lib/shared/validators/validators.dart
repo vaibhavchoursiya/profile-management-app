@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Validators {
   static String? notEmptyValidator(String? value, String? labelText) {
     if (value == null || value.isEmpty) {
@@ -63,6 +65,40 @@ class Validators {
   static String? loginPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Password is required';
+    }
+
+    return null;
+  }
+
+  static String? dOBValidator(String? value, String labelText) {
+    if (value == null || value.isEmpty) {
+      return '$labelText is required';
+    }
+
+    final int dOBYear = DateFormat("dd-MM-yyyy").parse(value).year;
+    final int currentDateYear = DateTime.now().year;
+
+    if (dOBYear > currentDateYear - 14) {
+      return "Enter valid DOB / age > 14";
+    }
+
+    return null;
+  }
+
+  static String? passingYearValidator(String? value, String labelText) {
+    if (value == null || value.isEmpty) {
+      return '$labelText is required';
+    }
+
+    final isInt = int.tryParse(value);
+
+    if (isInt == null) {
+      return "Enter valid integer";
+    }
+
+    final currentYear = DateTime.now().year;
+    if (isInt < 1947 || isInt > currentYear + 5) {
+      return "Enter valid passing year";
     }
 
     return null;
