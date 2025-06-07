@@ -8,4 +8,6 @@ abstract class UserApiBase {
   Stream<List<UserModel>> getAllUserDeatils();
 
   Future<void> deleteUserDetails(String id);
+
+  Future<void> getUserDetails(String id);
 }
