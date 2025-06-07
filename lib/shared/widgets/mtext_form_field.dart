@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:profile_management_app/constant/degrees.dart';
+import 'package:profile_management_app/feature/profile_management/bloc/profile_management_bloc.dart';
+import 'package:profile_management_app/feature/profile_management/bloc/profile_management_event.dart';
 import 'package:profile_management_app/shared/helper_methods/helper_methods.dart';
 
 class MtextFormField extends StatelessWidget {
@@ -220,8 +223,14 @@ class _MdegreeDropMenuState extends State<MdegreeDropMenu> {
                   controller: widget.controller,
                   requestFocusOnTap: true,
                   onSelected: (value) {
+                    final ProfileManagementBloc profileManagementBloc =
+                        context.read<ProfileManagementBloc>();
                     if (value != null) {
                       widget.controller.text = value;
+
+                      profileManagementBloc.add(
+                        ProfileManagementDegreeSelected(selectedDegree: value),
+                      );
                     } else {
                       widget.controller.text = "";
                     }
