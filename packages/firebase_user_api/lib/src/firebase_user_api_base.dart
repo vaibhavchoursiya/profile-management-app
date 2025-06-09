@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:dio/dio.dart';
 import 'package:user_api/src/models/user_model.dart';
 import 'package:user_api/user_api.dart';
 
 class FirebaseUserApiBase extends UserApiBase {
+  final Dio dio = Dio();
   final CollectionReference collectionReference = FirebaseFirestore.instance
       .collection("users");
 
@@ -60,7 +59,7 @@ class FirebaseUserApiBase extends UserApiBase {
   Future<void> saveUserDetails(UserModel userModel) async {
     try {
       final Map<String, dynamic> data = userModel.toMap();
-      data["userImage"] = "";
+      data["userImage"] = await uploadImage(userModel.userImage);
       await collectionReference.add(data);
     } catch (e) {
       rethrow;
@@ -71,7 +70,8 @@ class FirebaseUserApiBase extends UserApiBase {
   Future<void> updateUserDetails(UserModel userModel) async {
     try {
       final Map<String, dynamic> data = userModel.toMap();
-      data["userImage"] = "";
+      data["userImage"] = await uploadImage(userModel.userImage);
+      print(data["userImage"]);
 
       final querySnapshot =
           await collectionReference
@@ -90,22 +90,22 @@ class FirebaseUserApiBase extends UserApiBase {
     }
   }
 
-  Future<String?> uploadImageToFirebase(String image) async {
-    try {
-      final storageRef = FirebaseStorage.instance.ref();
-      final imageRef = storageRef.child(
-        'user_images/${DateTime.now().millisecondsSinceEpoch}.jpg',
-      );
+  // Future<String?> uploadImageToFirebase(String image) async {
+  //   try {
+  //     final storageRef = FirebaseStorage.instance.ref();
+  //     final imageRef = storageRef.child(
+  //       'user_images/${DateTime.now().millisecondsSinceEpoch}.jpg',
+  //     );
 
-      await imageRef.putData(await File(image).readAsBytes());
+  //     await imageRef.putData(await File(image).readAsBytes());
 
-      final downloadUrl = await imageRef.getDownloadURL();
-      return downloadUrl;
-    } catch (e) {
-      print("Upload error: $e");
-      return null;
-    }
-  }
+  //     final downloadUrl = await imageRef.getDownloadURL();
+  //     return downloadUrl;
+  //   } catch (e) {
+  //     print("Upload error: $e");
+  //     return null;
+  //   }
+  // }
 
   @override
   Future<List<UserModel>> searchUserByName(String name) async {
@@ -124,6 +124,35 @@ class FirebaseUserApiBase extends UserApiBase {
       return userModels;
     } catch (e) {
       throw Exception("Not Able to Search : $e");
+    }
+  }
+
+  // Yes i know that I should store key in .env but its public key already.
+  Future<String> uploadImage(String imagePath) async {
+    try {
+      final Map<String, dynamic> data = {
+        "key": "6d207e02198a847aa98d0a2a901485a5",
+        "action": "upload",
+        "source": await MultipartFile.fromFile(imagePath),
+      };
+      final FormData formData = FormData.fromMap(data);
+
+      final Response res = await dio.post(
+        "https://freeimage.host/api/1/upload",
+        data: formData,
+      );
+
+      final decodedData = res.data;
+
+      print("Decoded Data: $decodedData");
+
+      if (decodedData["status_code"] == 200) {
+        return decodedData["image"]["url"];
+      }
+      return "";
+    } catch (e) {
+      print(" error : $e");
+      return "";
     }
   }
 }

@@ -116,8 +116,8 @@ class ProfileManagementBloc
       emit(
         state.copyWith(
           stateStatusModel: StateStatusModel(
-            status: Status.success,
-            message: "Success",
+            status: Status.loading,
+            message: "",
           ),
         ),
       );

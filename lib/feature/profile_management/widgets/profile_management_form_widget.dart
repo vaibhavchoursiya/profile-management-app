@@ -15,6 +15,7 @@ import 'package:profile_management_app/feature/profile_management/bloc/profile_m
 import 'package:profile_management_app/shared/models/state_status_model.dart';
 import 'package:profile_management_app/shared/validators/validators.dart';
 import 'package:profile_management_app/shared/widgets/mtext_form_field.dart';
+import 'package:profile_management_app/shared/widgets/network_image_widget.dart';
 import 'package:profile_management_app/shared/widgets/show_snack_bar_widget.dart';
 
 class ProfileFormWidget extends StatefulWidget {
@@ -172,16 +173,23 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
                       if (state != "") {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(40.0),
-                          child: Image.file(
-                            File(state),
-                            width: 80.0,
-                            height: 80.0,
+                          child:
+                              state.contains("http")
+                                  ? NetworkImageWidget(
+                                    imageUrl: state,
+                                    width: 80.0,
+                                    height: 80.0,
+                                  )
+                                  : Image.file(
+                                    File(state),
+                                    width: 80.0,
+                                    height: 80.0,
 
-                            fit: BoxFit.cover,
-                            errorBuilder:
-                                (context, error, stackTrace) =>
-                                    Text("not found"),
-                          ),
+                                    fit: BoxFit.cover,
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            Text("not found"),
+                                  ),
                         );
                       }
                       return Container(

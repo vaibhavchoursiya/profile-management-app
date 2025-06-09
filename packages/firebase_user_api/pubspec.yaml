@@ -13,6 +13,7 @@ dependencies:
   firebase_core: ^3.13.1
   cloud_firestore: ^5.6.8
   firebase_storage:
+  dio: ^5.8.0
 
   user_api:
     path: ../user_api
