@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:profile_management_app/config/app_theme/app_theme.dart';
 import 'package:profile_management_app/config/app_theme/app_typography.dart';
+import 'package:profile_management_app/feature/home/bloc/home_bloc.dart';
+import 'package:profile_management_app/feature/home/bloc/home_state.dart';
 import 'package:profile_management_app/feature/profile_management/bloc/profile_management_bloc.dart';
 import 'package:profile_management_app/feature/profile_management/bloc/profile_management_event.dart';
 import 'package:profile_management_app/feature/profile_management/bloc/profile_management_state.dart';
@@ -285,10 +287,22 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
               ),
               SizedBox(height: AppTypography.textFormFieldSpace),
 
-              MdegreeDropMenu(
-                controller: degreeMenuController,
-                hintText: "Search Degree",
-                labelText: "Degree",
+              BlocSelector<
+                ProfileManagementBloc,
+                ProfileManagementState,
+                String
+              >(
+                selector: (state) {
+                  return state.selectedDegree;
+                },
+                builder: (context, state) {
+                  return MdegreeDropMenu(
+                    controller: degreeMenuController,
+                    hintText: "Search Degree",
+                    labelText: "Degree",
+                    initialValue: state != "" ? state : null,
+                  );
+                },
               ),
               SizedBox(height: AppTypography.textFormFieldSpace),
 

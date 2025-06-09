@@ -175,12 +175,14 @@ class MdegreeDropMenu extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final String labelText;
+  final String? initialValue;
 
   const MdegreeDropMenu({
     super.key,
     required this.controller,
     required this.hintText,
     required this.labelText,
+    required this.initialValue,
   });
 
   @override
@@ -206,6 +208,7 @@ class _MdegreeDropMenuState extends State<MdegreeDropMenu> {
 
         FormField(
           key: degreeDropdowmFormKey,
+          initialValue: widget.initialValue,
           validator: (value) {
             if (value == null || value == "") {
               return "Select degree is required";
@@ -219,6 +222,7 @@ class _MdegreeDropMenuState extends State<MdegreeDropMenu> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DropdownMenu(
+                  initialSelection: widget.initialValue,
                   width: double.infinity,
                   controller: widget.controller,
                   requestFocusOnTap: true,
