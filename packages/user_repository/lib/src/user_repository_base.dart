@@ -18,4 +18,8 @@ class UserRepositoryBase {
   Future<void> updateUserDetails(UserModel userModel) async {
     await userApiBase.updateUserDetails(userModel);
   }
+
+  Stream<List<UserModel>> getAllUserDetails() {
+    return userApiBase.getAllUserDeatils();
+  }
 }

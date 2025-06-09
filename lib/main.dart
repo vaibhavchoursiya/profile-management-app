@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profile_management_app/config/app_router/app_routes.dart';
 import 'package:profile_management_app/config/app_theme/app_theme.dart';
+import 'package:profile_management_app/feature/home/bloc/home_bloc.dart';
 import 'package:profile_management_app/feature/login/bloc/login_bloc.dart';
 import 'package:profile_management_app/feature/profile_management/bloc/profile_management_bloc.dart';
 import 'package:profile_management_app/feature/register/bloc/register_bloc.dart';
@@ -83,6 +84,13 @@ class MyApp extends StatelessWidget {
             create:
                 (context) => ProfileManagementBloc(
                   firebaseAuth: firebaseAuth,
+                  userRepositoryBase: context.read<UserRepositoryBase>(),
+                ),
+          ),
+
+          BlocProvider(
+            create:
+                (context) => HomeBloc(
                   userRepositoryBase: context.read<UserRepositoryBase>(),
                 ),
           ),
