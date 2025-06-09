@@ -48,7 +48,7 @@ class HomeNavBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hii Vaibhav 👋",
+                    "Hii  👋",
                     style: GoogleFonts.roboto(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
