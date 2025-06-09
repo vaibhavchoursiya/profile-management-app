@@ -36,8 +36,12 @@ class _ProfileManagementScreenState extends State<ProfileManagementScreen> {
 
   resetStateAndPop(BuildContext context) {
     final profileManagementBloc = context.read<ProfileManagementBloc>();
-    context.pop();
+
+    if (profileManagementBloc.state.stateStatusModel.status == Status.loading) {
+      return;
+    }
     profileManagementBloc.add(ProfileManagementStateReset());
+    context.pop();
   }
 
   @override
