@@ -130,6 +130,10 @@ class FirebaseUserApiBase extends UserApiBase {
   // Yes i know that I should store key in .env but its public key already.
   Future<String> uploadImage(String imagePath) async {
     try {
+      if (imagePath.contains("http")) {
+        return imagePath;
+      }
+
       final Map<String, dynamic> data = {
         "key": "6d207e02198a847aa98d0a2a901485a5",
         "action": "upload",

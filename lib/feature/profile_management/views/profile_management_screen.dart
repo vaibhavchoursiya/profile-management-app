@@ -36,8 +36,8 @@ class _ProfileManagementScreenState extends State<ProfileManagementScreen> {
 
   resetStateAndPop(BuildContext context) {
     final profileManagementBloc = context.read<ProfileManagementBloc>();
-    profileManagementBloc.add(ProfileManagementStateReset());
     context.pop();
+    profileManagementBloc.add(ProfileManagementStateReset());
   }
 
   @override
@@ -77,7 +77,8 @@ class _ProfileManagementScreenState extends State<ProfileManagementScreen> {
                   (previous, current) =>
                       previous.stateStatusModel != current.stateStatusModel,
               builder: (context, state) {
-                if (state.stateStatusModel.status == Status.loading) {
+                if (state.stateStatusModel.status == Status.loading ||
+                    state.stateStatusModel.status == Status.success) {
                   return LoadingModelBarrierWidget();
                 }
                 return SizedBox.shrink();

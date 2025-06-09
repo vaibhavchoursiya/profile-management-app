@@ -112,9 +112,9 @@ class _ProfileFormWidgetState extends State<ProfileFormWidget> {
   }
 
   resetStateAndPop(BuildContext context) {
+    context.pop();
     final profileManagementBloc = context.read<ProfileManagementBloc>();
     profileManagementBloc.add(ProfileManagementStateReset());
-    context.pop();
   }
 
   @override
