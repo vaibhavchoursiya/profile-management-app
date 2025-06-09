@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:profile_management_app/shared/widgets/network_image_widget.dart';
 import 'package:user_api/user_api.dart';
 
 class UserCard extends StatelessWidget {
@@ -29,16 +30,12 @@ class UserCard extends StatelessWidget {
                 horizontal: 20.0,
                 // vertical: 12.0,
               ),
-              leading: Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.person,
-                  color: Theme.of(context).colorScheme.onPrimary,
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: NetworkImageWidget(
+                  height: 50.0,
+                  width: 50.0,
+                  imageUrl: user.userImage,
                 ),
               ),
               title: Text(

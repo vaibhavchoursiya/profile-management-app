@@ -62,7 +62,7 @@ class _ProfileManagementScreenState extends State<ProfileManagementScreen> {
                   ),
                   HeaderWidget(
                     onTap: () {
-                      context.pop();
+                      resetStateAndPop(context);
                     },
                     iconData: Icons.arrow_back,
                     titleText: "Manage profile",
