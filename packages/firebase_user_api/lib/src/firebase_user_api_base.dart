@@ -106,4 +106,24 @@ class FirebaseUserApiBase extends UserApiBase {
       return null;
     }
   }
+
+  @override
+  Future<List<UserModel>> searchUserByName(String name) async {
+    try {
+      final QuerySnapshot querySnapshot =
+          await collectionReference.where("name", isEqualTo: name).get();
+
+      final List<UserModel> userModels =
+          querySnapshot.docs.map((doc) {
+            final UserModel userModel = UserModel.fromJson(
+              doc.data() as Map<String, dynamic>,
+            );
+            return userModel;
+          }).toList();
+
+      return userModels;
+    } catch (e) {
+      throw Exception("Not Able to Search : $e");
+    }
+  }
 }

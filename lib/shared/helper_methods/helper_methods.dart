@@ -8,6 +8,6 @@ class HelperMethods {
   }
 
   static double getResponsiveWidth(context) {
-    return MediaQuery.of(context).size.height;
+    return MediaQuery.of(context).size.width;
   }
 }

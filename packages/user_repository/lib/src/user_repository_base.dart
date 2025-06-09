@@ -22,4 +22,10 @@ class UserRepositoryBase {
   Stream<List<UserModel>> getAllUserDetails() {
     return userApiBase.getAllUserDeatils();
   }
+
+  Future<List<UserModel>> searchUserByName(String name) async {
+    final List<UserModel> userModels = await userApiBase.searchUserByName(name);
+
+    return userModels;
+  }
 }

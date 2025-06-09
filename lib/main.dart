@@ -11,6 +11,7 @@ import 'package:profile_management_app/feature/home/bloc/home_bloc.dart';
 import 'package:profile_management_app/feature/login/bloc/login_bloc.dart';
 import 'package:profile_management_app/feature/profile_management/bloc/profile_management_bloc.dart';
 import 'package:profile_management_app/feature/register/bloc/register_bloc.dart';
+import 'package:profile_management_app/feature/search/bloc/search_bloc.dart';
 import 'package:profile_management_app/feature/splash/cubit/splash_cubit.dart';
 import 'package:profile_management_app/firebase_options.dart';
 import 'package:profile_management_app/shared/services/fireabse_auth_instance.dart';
@@ -91,6 +92,13 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create:
                 (context) => HomeBloc(
+                  userRepositoryBase: context.read<UserRepositoryBase>(),
+                ),
+          ),
+
+          BlocProvider(
+            create:
+                (context) => SearchBloc(
                   userRepositoryBase: context.read<UserRepositoryBase>(),
                 ),
           ),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:profile_management_app/constant/degrees.dart';
 import 'package:profile_management_app/feature/profile_management/bloc/profile_management_bloc.dart';
 import 'package:profile_management_app/feature/profile_management/bloc/profile_management_event.dart';
+import 'package:profile_management_app/feature/search/bloc/search_bloc.dart';
+import 'package:profile_management_app/feature/search/bloc/search_event.dart';
 import 'package:profile_management_app/shared/helper_methods/helper_methods.dart';
 
 class MtextFormField extends StatelessWidget {
@@ -260,6 +263,63 @@ class _MdegreeDropMenuState extends State<MdegreeDropMenu> {
               ],
             );
           },
+        ),
+      ],
+    );
+  }
+}
+
+class MsearchFormField extends StatelessWidget {
+  final TextEditingController controller;
+  final String hintText;
+  final TextInputType textInputType;
+
+  const MsearchFormField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    required this.textInputType,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            controller: controller,
+            onFieldSubmitted: (value) {
+              if (value != "") {
+                context.push("/search", extra: {"searchQuery": value});
+              }
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Enter somthing.";
+              }
+              return null;
+            },
+            keyboardType: textInputType,
+            style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+            decoration: InputDecoration(hintText: hintText),
+          ),
+        ),
+        const SizedBox(width: 16.0),
+        IconButton(
+          style: IconButton.styleFrom(
+            padding: const EdgeInsets.all(12.0),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Theme.of(context).colorScheme.onPrimary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+          onPressed: () {
+            if (controller.text != "") {
+              context.push("/search", extra: {"searchQuery": controller.text});
+            }
+          },
+          icon: Icon(Icons.search),
         ),
       ],
     );

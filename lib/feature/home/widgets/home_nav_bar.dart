@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:profile_management_app/config/app_theme/app_typography.dart';
+import 'package:profile_management_app/feature/login/bloc/login_bloc.dart';
+import 'package:profile_management_app/feature/login/bloc/login_event.dart';
 
 class HomeNavBar extends StatelessWidget {
   const HomeNavBar({super.key});
@@ -67,7 +70,11 @@ class HomeNavBar extends StatelessWidget {
           ),
 
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              final LoginBloc loginBloc = context.read<LoginBloc>();
+              loginBloc.add(LogoutPressed());
+              context.go("/login");
+            },
             icon: Icon(
               Icons.logout,
               color: Theme.of(context).colorScheme.error,
